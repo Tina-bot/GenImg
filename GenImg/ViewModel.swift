@@ -17,7 +17,7 @@ final class ViewModel: ObservableObject{
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.addValue("Bearer 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", forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("Bearer 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", forHTTPHeaderField: "Authorization")
         
         let dictionary: [String: Any] = [
             "n": 1,
@@ -25,21 +25,26 @@ final class ViewModel: ObservableObject{
             "prompt": text
         ]
         urlRequest.httpBody = try! JSONSerialization.data(withJSONObject: dictionary, options: [])
-
+        if let requestBody = String(data: urlRequest.httpBody ?? Data(), encoding: .utf8) {
+             print("Request Body: \(requestBody)")
+         }
         do{
             DispatchQueue.main.async {
                 self.isLoading = true
             }
             let (data, _) = try await urlSession.data(for: urlRequest)
+            print("Response Data: \(String(data: data, encoding: .utf8) ?? "No data")")
             let model = try JSONDecoder().decode(ModelResponse.self, from: data)
-            
+            print("Response JSON: \(model)")
+
             DispatchQueue.main.async {
                 self.isLoading = false
-                guard let firstModel = model.data.first else {
-                    return
+                if let firstModel = model.data.first {
+                    self.imageURL = URL(string: firstModel.url)
+                    print(self.imageURL ?? "No result")
+                } else {
+                    print("No models in the response data.")
                 }
-                self.imageURL = URL(string: firstModel.url)
-                print(self.imageURL ?? "No result")
             }
         }catch{
             print(error.localizedDescription)
