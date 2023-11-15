@@ -1,7 +1,10 @@
 ![image](https://github.com/Tina-bot/GenImg/assets/72955349/a8030339-edaa-4cb1-a5e6-87d0b6f54fc0)
 
 # GenImg 🌠
->>This project for the purpose of practicing Swift
+>>This project for the purpose of practicing Swift </p>
+
+## About 🔍
+
 GenImg is a Swift mobile application that leverages the OpenIA API to generate images automatically.
 
 ## Features 💡
