@@ -29,9 +29,5 @@ GenImg is a Swift mobile application that leverages the OpenIA API to generate i
 ## To-Do ☑
 - Customize images.
 - Save and share the generated images.
-  
-## Contributions 
-
-Contributions and suggestions are welcome.
 
 ![image](https://github.com/Tina-bot/GenImg/assets/72955349/75c9f316-1bd3-45df-941e-bb0c16c1f9ce)
